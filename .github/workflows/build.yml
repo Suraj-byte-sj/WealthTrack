@@ -19,10 +19,7 @@ jobs:
         run: |
           unzip wealthtrack.zip -d project
           cd project
-          ls -la
-          SUBDIR=$(find . -name "gradlew" | head -1 | xargs dirname)
-          echo "Found at: $SUBDIR"
-          cd $SUBDIR
+          gradle wrapper
           chmod +x gradlew
           ./gradlew assembleDebug
 
@@ -30,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: WealthTrack-APK
-          path: "**/**/apk/debug/*.apk"
+          path: "project/app/build/outputs/apk/debug/app-debug.apk"
